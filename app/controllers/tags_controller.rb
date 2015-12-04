@@ -11,6 +11,15 @@ class TagsController < ApplicationController
     end
   end
 
+  def show
+    @tag = Tag.select{|t| t.name == params[:name]}.first
+    respond_to do |format|
+      format.json{
+        render json: @tag, serializer: TagSerializer
+      }
+    end
+  end
+
   private
 
   def tag_params
