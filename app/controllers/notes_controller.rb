@@ -13,7 +13,9 @@ class NotesController < ApplicationController
 
 
   def create
-    params[:note][:tag_names] = params[:note].delete :tags
+    if params[:note][:tags]
+      params[:note][:tag_names] = params[:note].delete :tags
+    end
     @note = Note.new(note_params)
     if @note.save
       respond_to do |format|
@@ -24,7 +26,10 @@ class NotesController < ApplicationController
     else
       respond_to do |format|
         format.json{
-          render json: @note.errors
+          render json: {
+            errors: @note.errors,
+            status: 400
+          }, :status=> 400
         }
       end
     end

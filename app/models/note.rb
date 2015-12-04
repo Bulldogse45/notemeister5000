@@ -2,6 +2,7 @@ class Note < ActiveRecord::Base
 
   has_many :tags, through: :taggings
   has_many :taggings
+  validates_presence_of :title, :body
 
   def tag_names=(alltags)
     alltags.split(",").collect{|t| t.strip}.each do |tag|
