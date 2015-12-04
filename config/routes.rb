@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :tags, except: [:new, :edit]
+  scope '/api/notes' do
+    resources :tags, except: [:new, :edit]
+  end
 
   scope '/api' do
     resources :notes, except: [:new, :edit]
