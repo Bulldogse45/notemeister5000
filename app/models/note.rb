@@ -1,6 +1,7 @@
 class Note < ActiveRecord::Base
 
   has_many :tags, through: :taggings
+  belongs_to :user
   has_many :taggings
   validates_presence_of :title, :body
 

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :users, except: [:new, :edit]
+  resources :user_sessions, except: [:new, :edit]
   resources :tags, except: [:new, :edit]
 
 
@@ -17,6 +19,8 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
 
   get 'api/notes/tag/:name' => 'tags#show'
+
+  post 'api/user/create' => 'users#create'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
