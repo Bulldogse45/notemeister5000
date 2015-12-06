@@ -5,7 +5,11 @@ class NotesController < ApplicationController
   protect_from_forgery :except=>:create
 
   def index
-    @notes = Note.all
+    if params[:api_token]
+      @notes = Note.where('user_id = ' + find_by_single_access_token(params[:api_token]).id.to_s)
+    else
+      @notes = Note.all
+    end
     respond_to do |format|
       format.json{
         render json: @notes
