@@ -6,9 +6,9 @@
 
   returns all notes in the API
 
-* POST /api/notes {"title" : "My created post", "body" : "My created body", "tags" : "tags, separated, by, commas"}
+* POST /api/notes {"title" : "My created post", "body" : "My created body", "tags" : "tags, separated, by, commas", "api_token":"<your-token-here"}
 
-  adds a new note with the associated title, body and tags.  Tags should be in a string separated by commas.  No symbols are spaces are allowed.  Spaces and symbols will be stripped out.  Only letters and numbers can be used. All tags will be downcased.
+  adds a new note with the associated title, body and tags.  Tags should be in a string separated by commas.  No symbols are spaces are allowed.  Spaces and symbols will be stripped out.  Only letters and numbers can be used. All tags will be downcased.  The api_token is optional if you want the note assigned to your account.
 
 * GET /api/notes/tag/:tag
 
