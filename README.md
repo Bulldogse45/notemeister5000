@@ -17,3 +17,7 @@
 * POST /api/user/create  {"email" : "whatever@example.com"}
 
   creates a new user and returns the email and api_token for that user.  Will return error if user exists already.
+
+* PATCH /api/notes/:id -d {data}
+
+  Edits a note for a user and returns the Note.  Will return error if api_token doesn't match the user's.

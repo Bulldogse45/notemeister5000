@@ -2,7 +2,7 @@ class NotesController < ApplicationController
   include ActionController::MimeResponds
   include ActionController::Serialization
 
-  protect_from_forgery :except=>:create
+  protect_from_forgery :except=> [:create, :update]
 
   def index
     if params[:api_token]
@@ -33,6 +33,41 @@ class NotesController < ApplicationController
         format.json{
           render json: {
             errors: "The token you entered did not match any of our records.",
+            status: 400
+          }, :status=> 400
+        }
+      end
+    end
+  end
+
+  def update
+    if params[:note][:tags]
+      params[:note][:tag_names] = params[:note].delete :tags
+    end
+    @note = Note.find(params['id'])
+    if params[:note][:api_token] && find_by_single_access_token(params[:note][:api_token])
+      @note.user = find_by_single_access_token(params[:note][:api_token])
+      if @note.update(note_params)
+        respond_to do |format|
+          format.json{
+            render json: @note, serializer: NoteSerializer
+          }
+        end
+      else
+        respond_to do |format|
+          format.json{
+            render json: {
+              errors: @note.errors,
+              status: 400
+            }, :status=> 400
+          }
+        end
+      end
+    else
+      respond_to do |format|
+        format.json{
+          render json: {
+            errors: "The token you entered did not match our records.",
             status: 400
           }, :status=> 400
         }
