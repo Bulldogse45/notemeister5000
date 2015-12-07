@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if @user.save
       respond_to do |format|
         format.json {
-          render json: @user
+          render json: @user, serializer: CreateUserSerializer
         }
       end
     else
