@@ -29,3 +29,9 @@ gem 'active_model_serializers'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+group :test do
+
+  gem 'factory_girl_rails'
+
+end
