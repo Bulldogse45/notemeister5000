@@ -9,6 +9,8 @@ gem 'spring', :group => :development
 
 gem 'authlogic'
 
+gem 'faker'
+
 gem 'pg'
 
 gem 'active_model_serializers'
