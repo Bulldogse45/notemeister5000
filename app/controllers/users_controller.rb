@@ -4,7 +4,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.api_token = SecureRandom.hex
     if @user.save
       respond_to do |format|
         format.json {
